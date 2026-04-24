@@ -20,23 +20,23 @@ Also triggers on: "commit changes", "commit now", "create commit", "git commit"
 
 ## Workflow
 
-### 1. Check Staged Changes
+### 1. Analyze Changes
+
+Check both staged and unstaged:
 
 ```bash
 git diff --cached --stat
 git diff --cached --name-only
+git diff --stat
+git diff --name-only
 ```
 
-If nothing staged → prompt user to stage first.
-
-### 2. Analyze Changes
+### 2. Generate Commit Message
 
 Determine from diff:
 - **Type**: feat | fix | refactor | perf | test | docs | chore | ci | build | revert
 - **Scope**: file/module affected (optional)
 - **Summary**: what changed (≤72 chars, imperative mood)
-
-### 3. Generate Commit Message
 
 Format: `<type>(<scope>): <description>`
 
@@ -48,13 +48,27 @@ docs: update installation instructions
 refactor(db): extract connection pooling
 ```
 
-### 4. Present Copy-able Commands
+### 3. Present Copy-able Commands
 
 DO NOT execute. Output shell commands for user to copy and run:
 
+If files already staged:
 ```bash
-# Stage files (if not already staged)
+git commit -m "<type>(<scope>): <description>"
+```
+
+If nothing staged:
+```bash
+# Stage changes (interactive mode - select specific changes)
 git add -p
+
+# Commit with message
+git commit -m "<type>(<scope>): <description>"
+```
+
+If user wants to stage all:
+```bash
+git add .
 
 # Commit with message
 git commit -m "<type>(<scope>): <description>"
@@ -62,10 +76,10 @@ git commit -m "<type>(<scope>): <description>"
 
 **Important:** Never include `git push` in output.
 
-### 5. Confirm with User
+### 4. Confirm with User
 
-After presenting commands, confirm:
-- Show the exact `git commit -m "..."` command
+After presenting commands:
+- Show the exact commands
 - Ask if they want to proceed or modify the message
 
 ## Type Reference
