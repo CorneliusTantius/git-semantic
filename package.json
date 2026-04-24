@@ -1,0 +1,22 @@
+{
+  "name": "git-semantic",
+  "version": "1.0.0",
+  "description": "Slash command skill for conventional git commits. Triggered via /gitsemantic.",
+  "main": "git-semantic/SKILL.md",
+  "slashCommand": "gitsemantic",
+  "compatibility": ["opencode", "claude-code", "claude", "cursor", "codex"],
+  "scripts": {
+    "install": "echo 'Install via: npx skills add nelly/git-semantic'"
+  },
+  "keywords": [
+    "opencode",
+    "claude",
+    "skill",
+    "git",
+    "commit",
+    "conventional-commits",
+    "slash-command"
+  ],
+  "author": "",
+  "license": "MIT"
+}
