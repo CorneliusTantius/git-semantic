@@ -6,7 +6,7 @@
   "slashCommand": "gitsemantic",
   "compatibility": ["opencode", "claude-code", "claude", "cursor", "codex"],
   "scripts": {
-    "install": "echo 'Install via: npx skills add nelly/git-semantic'"
+    "install": "echo 'Install via: npx skills add CorneliusTantius/git-semantic'"
   },
   "keywords": [
     "opencode",

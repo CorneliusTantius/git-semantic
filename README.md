@@ -5,7 +5,7 @@ Slash-command skill for generating and executing conventional git commits.
 ## Install
 
 ```bash
-npx skills add nelly/git-semantic
+npx skills add CorneliusTantius/git-semantic
 ```
 
 ## Usage
