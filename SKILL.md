@@ -1,7 +1,8 @@
 ---
 name: git-semantic
 description: >
-  Generate and execute git commits with Conventional Commits format.
+  Generate Conventional Commits messages and provide copy-able shell commands.
+  DO NOT execute commit — let developer run it. No git push in output.
   Trigger: "/gitsemantic" slash command or when user says "commit changes", "commit now",
   "create commit", "git commit". Works with OpenCode, Claude Code, and other agents.
 command: /gitsemantic
@@ -10,7 +11,7 @@ compatibility: opencode, claude-code, claude, cursor, codex, roo-code
 
 # Git Semantic Commit
 
-Execute git commits with Conventional Commits format. Single purpose: commit staged changes.
+Generate Conventional Commits message. Provide copy-able shell commands. **DO NOT execute commit — let developer run it.**
 
 ## Command Trigger
 
@@ -47,19 +48,25 @@ docs: update installation instructions
 refactor(db): extract connection pooling
 ```
 
-### 4. Confirm Before Commit
+### 4. Present Copy-able Commands
 
-Show proposed message. Ask: "Commit with this message? [y/n]"
-
-If no → offer to regenerate or accept custom message.
-
-### 5. Execute Commit
+DO NOT execute. Output shell commands for user to copy and run:
 
 ```bash
-git commit -m "<message>"
+# Stage files (if not already staged)
+git add -p
+
+# Commit with message
+git commit -m "<type>(<scope>): <description>"
 ```
 
-Show result: "Committed successfully. [hash]"
+**Important:** Never include `git push` in output.
+
+### 5. Confirm with User
+
+After presenting commands, confirm:
+- Show the exact `git commit -m "..."` command
+- Ask if they want to proceed or modify the message
 
 ## Type Reference
 
