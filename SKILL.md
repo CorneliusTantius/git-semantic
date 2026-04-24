@@ -76,6 +76,43 @@ Show result: "Committed successfully. [hash]"
 | `build` | Changes to build system or external dependencies |
 | `revert` | Reverts a previous commit |
 
+## Atomic Commit Rules
+
+An atomic commit does exactly one thing. Not one feature — one logical change. Smallest unit that can stand alone, be reviewed, reverted, or cherry-picked without side effects.
+
+### Golden Rules
+
+1. **One logical change per commit** — If message needs "and", split it.
+   ```
+   # Not atomic — two concerns
+   feat(profile): add avatar upload and fix broken validation
+
+   # Atomic — two commits
+   feat(profile): add avatar upload endpoint
+   fix(profile): correct validation error for missing fields
+   ```
+
+2. **Must compile, tests must pass** — Every commit must pass `npm run build` and `npm test`. Makes `git bisect` reliable.
+
+3. **Staged changes must be clean** — Use lint-staged. Commits with lint errors or formatting violations will be aborted.
+
+4. **Use interactive rebase before PR** — Clean WIP commits before opening PR:
+   ```bash
+   git rebase -i origin/main
+   ```
+   Use `squash`/`fixup` to collapse into clean atomic commits.
+
+5. **Stage selectively — not `git add .`** — Use `git add -p` to stage only relevant lines. Forces atomic thinking at line level.
+
+### Size Guard
+
+| Too Small | Too Big | Just Right |
+|-----------|---------|------------|
+| Single typo fix | 5+ files, multiple concerns | 1 file or 1 logical unit |
+| "oops" commit | Mixed feat + fix + refactor | Single purpose, reviewable |
+
+If changes >5 files or multiple concerns → prompt to split.
+
 ## Notes
 
 - No breaking changes by default (add `!` if needed)
